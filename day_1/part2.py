@@ -12,16 +12,13 @@ with open("1-input.txt") as file:
         amount = int(act[1:])
         
         if dir == "R":
-            zeroCount += abs((curNum + amount) // 100)
-            curNum = (curNum + amount) % 100
+            for i in range(amount):
+                curNum = (curNum + 1) % 100
+                zeroCount += len(str(curNum == 0)) == 4
                 
         if dir == "L":
-            if curNum != 0 and (curNum - amount) % 100 != 0:
-                zeroCount += abs((curNum - amount) // 100)
-            elif (curNum - amount) % 100 == 0:
-                zeroCount += abs((curNum - amount) // 100) + 1
-            else:
-                zeroCount += abs((curNum - amount) // 100) - 1
-            curNum = (curNum - amount) % 100
+            for i in range(amount):
+                curNum = (curNum - 1) % 100
+                zeroCount += len(str(curNum != 0)) == 5
             
 print(zeroCount)
